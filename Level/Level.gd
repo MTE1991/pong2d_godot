@@ -12,9 +12,9 @@ func _ready():
 	get_tree().call_group('PlayerGroup', 'stop_player')
 	
 	# Add difficulty options
-	$OptionButton.add_item("Easy")
-	$OptionButton.add_item("Medium")
-	$OptionButton.add_item("Hard")
+	var difficulty = ["Easy", "Medium", "Hard"]
+	for s in difficulty:
+		$OptionButton.add_item(s)
 	
 	# Connect the start button with the timer
 	$StartButton.connect("pressed", self, "_on_StartButton_pressed")
