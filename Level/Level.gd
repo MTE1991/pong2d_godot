@@ -52,8 +52,8 @@ func score_achieved():
 	start_game()
 	$StartButton.show()
 	$OptionButton.show()
-	$ExitButton.show()
 	$DifficultyLabel.show()
+	$ExitButton.show()
 	$Player.position.y = 360
 	$Opponent.position.y = 360
 

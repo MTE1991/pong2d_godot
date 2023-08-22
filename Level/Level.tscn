@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Opponent/Opponent.tscn" type="PackedScene" id=2]
@@ -7,6 +7,11 @@
 [ext_resource path="res://assets/PressStart2P-vaV7.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://assets/ping_pong_8bit_plop.ogg" type="AudioStream" id=6]
 [ext_resource path="res://assets/VCR_OSD_MONO_1.001.ttf" type="DynamicFontData" id=7]
+[ext_resource path="res://assets/start.png" type="Texture" id=8]
+[ext_resource path="res://assets/quit.png" type="Texture" id=9]
+[ext_resource path="res://assets/separator.png" type="Texture" id=10]
+[ext_resource path="res://assets/Circle.png" type="Texture" id=11]
+[ext_resource path="res://assets/levelselect.png" type="Texture" id=12]
 
 [sub_resource type="DynamicFont" id=1]
 size = 40
@@ -18,6 +23,7 @@ font_data = ExtResource( 7 )
 
 [sub_resource type="DynamicFont" id=3]
 size = 50
+outline_color = Color( 1, 0.901961, 0.615686, 1 )
 font_data = ExtResource( 5 )
 
 [sub_resource type="RectangleShape2D" id=4]
@@ -31,10 +37,6 @@ size = 40
 font_data = ExtResource( 7 )
 
 [sub_resource type="DynamicFont" id=7]
-size = 40
-font_data = ExtResource( 7 )
-
-[sub_resource type="DynamicFont" id=8]
 size = 40
 font_data = ExtResource( 7 )
 
@@ -56,16 +58,26 @@ script = ExtResource( 4 )
 [node name="ColorRect" type="ColorRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0.0784314, 0.129412, 0.14902, 1 )
+color = Color( 0.145098, 0.168627, 0.286275, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Seperator" type="Sprite" parent="."]
+position = Vector2( -1279.21, -513.3 )
+scale = Vector2( 3.00034, 1.8225 )
+texture = ExtResource( 10 )
+offset = Vector2( 639, 480 )
+
+[node name="Circle" type="Sprite" parent="."]
+position = Vector2( 639, 360 )
+texture = ExtResource( 11 )
 
 [node name="PlayerScore" type="Label" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -200.0
-custom_colors/font_color = Color( 0.85098, 0.847059, 0.843137, 1 )
+custom_colors/font_color = Color( 1, 0.901961, 0.615686, 1 )
 custom_fonts/font = SubResource( 1 )
 text = "Test"
 align = 1
@@ -74,7 +86,7 @@ align = 1
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 200.0
-custom_colors/font_color = Color( 0.85098, 0.847059, 0.843137, 1 )
+custom_colors/font_color = Color( 1, 0.901961, 0.615686, 1 )
 custom_fonts/font = SubResource( 2 )
 text = "Test"
 align = 1
@@ -83,7 +95,7 @@ align = 1
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -374.0
-custom_colors/font_color = Color( 0.952941, 0.313726, 0.160784, 1 )
+custom_colors/font_color = Color( 1, 0.901961, 0.615686, 1 )
 custom_fonts/font = SubResource( 3 )
 text = "3
 "
@@ -142,33 +154,29 @@ one_shot = true
 stream = ExtResource( 6 )
 
 [node name="StartButton" type="Button" parent="."]
-margin_left = 504.0
-margin_top = 302.0
-margin_right = 666.0
-margin_bottom = 389.0
+margin_left = 372.0
+margin_top = 473.0
+margin_right = 639.0
+margin_bottom = 565.0
 custom_fonts/font = SubResource( 6 )
-text = "Start"
+icon = ExtResource( 8 )
+flat = true
 
 [node name="OptionButton" type="OptionButton" parent="."]
-margin_left = 653.0
-margin_top = 405.0
-margin_right = 917.0
-margin_bottom = 474.0
+margin_left = 652.0
+margin_top = 569.0
+margin_right = 815.0
+margin_bottom = 616.0
 custom_fonts/font = SubResource( 7 )
-
-[node name="DifficultyLabel" type="Label" parent="."]
-margin_left = 381.0
-margin_top = 419.0
-margin_right = 657.0
-margin_bottom = 455.0
-custom_fonts/font = SubResource( 8 )
-text = "Difficulty: "
+flat = true
+expand_icon = true
 
 [node name="GameTitle" type="Label" parent="."]
 margin_left = 436.0
 margin_top = 60.0
 margin_right = 856.0
 margin_bottom = 127.0
+custom_colors/font_color = Color( 1, 0.901961, 0.615686, 1 )
 custom_fonts/font = SubResource( 10 )
 text = "Pong 2D"
 
@@ -177,16 +185,22 @@ margin_left = 534.0
 margin_top = 140.0
 margin_right = 750.0
 margin_bottom = 167.0
+custom_colors/font_color = Color( 1, 0.901961, 0.615686, 1 )
 custom_fonts/font = SubResource( 11 )
 text = "by MT Ekleel"
 
 [node name="ExitButton" type="Button" parent="."]
-margin_left = 687.0
-margin_top = 302.0
-margin_right = 844.0
-margin_bottom = 389.0
+margin_left = 647.0
+margin_top = 475.0
+margin_right = 909.0
+margin_bottom = 559.0
 custom_fonts/font = SubResource( 12 )
-text = "Quit"
+icon = ExtResource( 9 )
+flat = true
+
+[node name="DifficultyLabel" type="Sprite" parent="."]
+position = Vector2( 502, 592 )
+texture = ExtResource( 12 )
 
 [connection signal="body_entered" from="Left" to="." method="_on_Left_body_entered"]
 [connection signal="body_entered" from="Right" to="." method="_on_Right_body_entered"]
