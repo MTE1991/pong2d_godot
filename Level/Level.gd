@@ -31,6 +31,8 @@ func _ready():
 	
 
 func show_ui():
+	$AuthorTitle.show()
+	$GameTitle.show()
 	$StartButton.show()
 	$OptionButton.show()
 	$GameModeBtn.show()
@@ -146,6 +148,8 @@ func _on_GameModeBtn_item_selected(index):
 	if $GameModeBtn.get_item_text(index) == "Singleplayer":
 		$Opponent.isHuman = false
 		$OptionButton.disabled = false
+		PlayerScore = 0
+		OpponentScore = 0
 	else:
 		$Opponent.isHuman = true
 		$OptionButton.disabled = true
