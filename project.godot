@@ -14,7 +14,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Pong 0 - Intro"
+config/name="Pong2D by BUP ITC"
 run/main_scene="res://Level/Level.tscn"
 
 [display]

@@ -82,7 +82,7 @@ color = Color( 0.145098, 0.168627, 0.286275, 1 )
 position = Vector2( -1279.21, -513.3 )
 scale = Vector2( 3.00034, 1.8225 )
 texture = ExtResource( 10 )
-offset = Vector2( 639, 480 )
+offset = Vector2( 640, 480 )
 
 [node name="Circle" type="Sprite" parent="."]
 position = Vector2( 639, 360 )

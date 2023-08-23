@@ -3,7 +3,7 @@ extends Node
 
 var PlayerScore = 0
 var OpponentScore = 0
-var ball_speed = 600
+var ball_speed = 650
 var opponent_speed = 450
 var opponent_diff = 45
 var player_speed = 450
@@ -103,21 +103,20 @@ func _on_StartButton_pressed():
 
 
 func _on_OptionButton_item_selected(index):
-	if $GameModeBtn.get_item_text(index) == "Singleplayer":
-		if $OptionButton.get_item_text(index) == "Easy":
-			ball_speed = 650
-			opponent_speed = 450
-			opponent_diff = 45
-		elif $OptionButton.get_item_text(index) == "Medium":
-			ball_speed = 750
-			opponent_speed = 700
-			player_speed = 650
-			opponent_diff = 30
-		else:
-			ball_speed = 1000
-			opponent_speed = 1000
-			player_speed = 950
-			opponent_diff = 25
+	if $OptionButton.get_item_text(index) == "Easy":
+		ball_speed = 650
+		opponent_speed = 450
+		opponent_diff = 45
+	elif $OptionButton.get_item_text(index) == "Medium":
+		ball_speed = 750
+		opponent_speed = 700
+		player_speed = 650
+		opponent_diff = 30
+	else:
+		ball_speed = 1000
+		opponent_speed = 1000
+		player_speed = 950
+		opponent_diff = 25
 			
 	# Reset scores
 	PlayerScore = 0
@@ -146,8 +145,9 @@ func _on_GoBackButton_pressed():
 func _on_GameModeBtn_item_selected(index):
 	if $GameModeBtn.get_item_text(index) == "Singleplayer":
 		$Opponent.isHuman = false
+		$OptionButton.disabled = false
 	else:
 		$Opponent.isHuman = true
+		$OptionButton.disabled = true
 		PlayerScore = 0
 		OpponentScore = 0
-		ball_speed = 700
