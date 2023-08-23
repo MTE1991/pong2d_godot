@@ -1,5 +1,6 @@
 extends Node
 
+
 var PlayerScore = 0
 var OpponentScore = 0
 var ball_speed = 600
@@ -20,6 +21,30 @@ func _ready():
 	$StartButton.connect("pressed", self, "_on_StartButton_pressed")
 	
 	$CountdownLabel.visible = false
+	$Credits.visible = false
+	$GoBackButton.visible = false
+	
+
+func show_ui():
+	$StartButton.show()
+	$OptionButton.show()
+	$CreditsButton.show()
+	$DifficultyLabel.show()
+	$ExitButton.show()
+	$CreditsButton.visible = true
+	$CreditsButton/Label.visible = true
+
+func hide_ui():
+	$GoBackButton.hide()
+	$Credits.hide()
+	$StartButton.hide()
+	$OptionButton.hide()
+	$ExitButton.hide()
+	$DifficultyLabel.hide()
+	$GameTitle.hide()
+	$AuthorTitle.hide()
+	$CreditsButton.hide()
+	$CreditsButton/Label.hide()
 
 
 func _on_Left_body_entered(body):
@@ -50,25 +75,18 @@ func score_achieved():
 	$Ball.position = Vector2(640,360)
 	get_tree().call_group('BallGroup','stop_ball')
 	start_game()
-	$StartButton.show()
-	$OptionButton.show()
-	$DifficultyLabel.show()
-	$ExitButton.show()
+	show_ui()
 	$Player.position.y = 360
 	$Opponent.position.y = 360
 
+
 func start_game():
-	$CountdownLabel.visible = true
+	$CountdownLabel.visible = false
 	$ScoreSound.play()
 	$Player.position.x = 50
 	get_tree().call_group('PlayerGroup', 'start_player')
 	$Opponent.position.x = 1280 - 50
-	$StartButton.hide()
-	$OptionButton.hide()
-	$ExitButton.hide()
-	$DifficultyLabel.hide()
-	$GameTitle.hide()
-	$AuthorTitle.hide()
+	hide_ui()
 
 
 func _on_StartButton_pressed():
@@ -83,12 +101,12 @@ func _on_OptionButton_item_selected(index):
 		opponent_speed = 450
 		opponent_diff = 45
 	elif $OptionButton.get_item_text(index) == "Medium":
-		ball_speed = 900
+		ball_speed = 750
 		opponent_speed = 700
 		player_speed = 650
 		opponent_diff = 30
 	else:
-		ball_speed = 1200
+		ball_speed = 1000
 		opponent_speed = 1000
 		player_speed = 950
 		opponent_diff = 25
@@ -103,3 +121,15 @@ func _on_OptionButton_item_selected(index):
 
 func _on_ExitButton_pressed():
 	get_tree().quit()
+
+
+func _on_CreditsButton_pressed():
+	hide_ui()
+	$GoBackButton.visible = true
+	$Credits.visible = true
+
+
+func _on_GoBackButton_pressed():
+	show_ui()
+	$GoBackButton.visible = false
+	$Credits.visible = false
