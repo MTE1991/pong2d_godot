@@ -5,9 +5,9 @@ var velocity
 
 func _physics_process(delta):
 	velocity = Vector2.ZERO
-	if Input.is_action_pressed("ui_up"):
+	if Input.is_action_pressed("ui_a"):
 		velocity.y -= 1
-	if Input.is_action_pressed("ui_down"):
+	if Input.is_action_pressed("ui_z"):
 		velocity.y += 1
 	move_and_slide(velocity * speed)
 

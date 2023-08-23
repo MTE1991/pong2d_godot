@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Opponent/Opponent.tscn" type="PackedScene" id=2]
@@ -61,6 +61,14 @@ font_data = ExtResource( 5 )
 [sub_resource type="DynamicFont" id=14]
 size = 40
 font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=15]
+size = 24
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=16]
+size = 21
+font_data = ExtResource( 5 )
 
 [node name="Level" type="Node"]
 script = ExtResource( 4 )
@@ -172,10 +180,10 @@ icon = ExtResource( 8 )
 flat = true
 
 [node name="OptionButton" type="OptionButton" parent="."]
-margin_left = 770.0
-margin_top = 333.0
-margin_right = 933.0
-margin_bottom = 380.0
+margin_left = 772.0
+margin_top = 382.0
+margin_right = 935.0
+margin_bottom = 429.0
 custom_fonts/font = SubResource( 7 )
 expand_icon = true
 
@@ -199,15 +207,15 @@ text = "by BUP InfoTech Club"
 
 [node name="ExitButton" type="Button" parent="."]
 margin_left = 511.0
-margin_top = 400.0
+margin_top = 440.0
 margin_right = 773.0
-margin_bottom = 484.0
+margin_bottom = 524.0
 custom_fonts/font = SubResource( 12 )
 icon = ExtResource( 9 )
 flat = true
 
 [node name="DifficultyLabel" type="Sprite" parent="."]
-position = Vector2( 640, 356 )
+position = Vector2( 642, 407 )
 texture = ExtResource( 12 )
 
 [node name="Credits" parent="." instance=ExtResource( 14 )]
@@ -255,6 +263,29 @@ custom_colors/font_color = Color( 0.309804, 1, 0.992157, 1 )
 custom_fonts/font = SubResource( 14 )
 text = "Go Back"
 
+[node name="GameModeBtn" type="OptionButton" parent="."]
+margin_left = 771.0
+margin_top = 315.0
+margin_right = 999.0
+margin_bottom = 358.0
+custom_fonts/font = SubResource( 15 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="GameModeBtn"]
+position = Vector2( -132, 19 )
+texture = ExtResource( 13 )
+
+[node name="GameModeLabel" type="Label" parent="GameModeBtn"]
+margin_left = -225.0
+margin_top = 10.0
+margin_right = -36.0
+margin_bottom = 44.0
+custom_colors/font_color = Color( 0.309804, 1, 0.992157, 1 )
+custom_fonts/font = SubResource( 16 )
+text = "Game Mode"
+
 [connection signal="body_entered" from="Left" to="." method="_on_Left_body_entered"]
 [connection signal="body_entered" from="Right" to="." method="_on_Right_body_entered"]
 [connection signal="timeout" from="CountdownTimer" to="." method="_on_CountdownTimer_timeout"]
@@ -263,3 +294,4 @@ text = "Go Back"
 [connection signal="pressed" from="ExitButton" to="." method="_on_ExitButton_pressed"]
 [connection signal="pressed" from="CreditsButton" to="." method="_on_CreditsButton_pressed"]
 [connection signal="pressed" from="GoBackButton" to="." method="_on_GoBackButton_pressed"]
+[connection signal="item_selected" from="GameModeBtn" to="." method="_on_GameModeBtn_item_selected"]
