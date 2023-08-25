@@ -7,6 +7,7 @@ var ball_speed = 650
 var opponent_speed = 450
 var opponent_diff = 45
 var player_speed = 450
+var roundEnd = false
 
 
 func _ready():
@@ -28,7 +29,9 @@ func _ready():
 	$CountdownLabel.visible = false
 	$Credits.visible = false
 	$GoBackButton.visible = false
-	
+	$PlayerWinMsg.visible = false
+	$OpponentWinMsg.visible = false
+
 
 func show_ui():
 	$AuthorTitle.show()
@@ -57,13 +60,12 @@ func hide_ui():
 
 
 func _on_Left_body_entered(body):
-	score_achieved()
 	OpponentScore += 1
-
+	score_achieved()
 
 func _on_Right_body_entered(body):
-	score_achieved()
 	PlayerScore += 1
+	score_achieved()
 
 
 func _process(delta):
@@ -78,25 +80,44 @@ func _on_CountdownTimer_timeout():
 	$Opponent.speed = opponent_speed
 	$Opponent.diff = opponent_diff
 	$CountdownLabel.visible = false
+	if $PlayerWinMsg.visible:
+		$PlayerWinMsg.hide()
+	if $OpponentWinMsg.visible:
+		$OpponentWinMsg.hide()
 
 
 func score_achieved():
 	$Ball.position = Vector2(647, 360)
-	get_tree().call_group('BallGroup','stop_ball')
-	start_game()
-	show_ui()
-	$Player.position.y = 360
-	$Opponent.position.y = 360
+	get_tree().call_group('BallGroup', 'stop_ball')
+	
+	if PlayerScore == 3:
+		$PlayerWinMsg.show()
+		PlayerScore = 0
+		OpponentScore = 0
+		show_ui()
+	elif OpponentScore == 3:
+		$OpponentWinMsg.show()
+		PlayerScore = 0
+		OpponentScore = 0
+		show_ui()
+	else:
+		$CountdownTimer.start()
+		$CountdownLabel.visible = true
+		$ScoreSound.play()
+		$Player.position.x = 35
+		$Opponent.position.x = 1280 - 35
+		start_game()
 
 
 func start_game():
-	$CountdownLabel.visible = false
+	$PlayerWinMsg.hide()
+	$OpponentWinMsg.hide()
 	$ScoreSound.play()
 	$Player.position.x = 50
 	get_tree().call_group('PlayerGroup', 'start_player')
 	$Opponent.position.x = 1280 - 50
 	hide_ui()
-
+	
 
 func _on_StartButton_pressed():
 	start_game()
