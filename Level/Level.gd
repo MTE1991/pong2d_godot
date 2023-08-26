@@ -44,6 +44,8 @@ func show_ui():
 	$ExitButton.show()
 	$CreditsButton.visible = true
 	$CreditsButton/Label.visible = true
+	$HelpButton.visible = true
+	$HelpButton/Label.visible = true
 
 func hide_ui():
 	$GoBackButton.hide()
@@ -57,6 +59,8 @@ func hide_ui():
 	$AuthorTitle.hide()
 	$CreditsButton.hide()
 	$CreditsButton/Label.hide()
+	$Help.hide()
+	$HelpButton.hide()
 
 
 func _on_Left_body_entered(body):
@@ -90,16 +94,34 @@ func score_achieved():
 	$Ball.position = Vector2(647, 360)
 	get_tree().call_group('BallGroup', 'stop_ball')
 	
-	if PlayerScore == 3:
+	if PlayerScore == 10 and not $Opponent.isHuman:
 		$PlayerWinMsg.show()
 		PlayerScore = 0
 		OpponentScore = 0
 		show_ui()
-	elif OpponentScore == 3:
+	elif OpponentScore == 3 and not $Opponent.isHuman:
 		$OpponentWinMsg.show()
 		PlayerScore = 0
 		OpponentScore = 0
 		show_ui()
+	elif $Opponent.isHuman:
+		if PlayerScore == 10:
+			$PlayerWinMsg.show()
+			PlayerScore = 0
+			OpponentScore = 0
+			show_ui()
+		elif OpponentScore == 10:
+			$OpponentWinMsg.show()
+			PlayerScore = 0
+			OpponentScore = 0
+			show_ui()
+		else:
+			$CountdownTimer.start()
+			$CountdownLabel.visible = true
+			$ScoreSound.play()
+			$Player.position.x = 35
+			$Opponent.position.x = 1280 - 35
+			start_game()
 	else:
 		$CountdownTimer.start()
 		$CountdownLabel.visible = true
@@ -162,7 +184,10 @@ func _on_CreditsButton_pressed():
 func _on_GoBackButton_pressed():
 	show_ui()
 	$GoBackButton.visible = false
-	$Credits.visible = false
+	if $Credits.visible:
+		$Credits.visible = false
+	if $Help.visible:
+		$Help.visible = false
 
 
 func _on_GameModeBtn_item_selected(index):
@@ -176,3 +201,9 @@ func _on_GameModeBtn_item_selected(index):
 		$OptionButton.disabled = true
 		PlayerScore = 0
 		OpponentScore = 0
+
+
+func _on_HelpButton_pressed():
+	hide_ui()
+	$GoBackButton.visible = true
+	$Help.visible = true
