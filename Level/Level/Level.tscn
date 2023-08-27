@@ -1,0 +1,356 @@
+[gd_scene load_steps=32 format=2]
+
+[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Opponent/Opponent.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Ball/Ball.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Level/Level.gd" type="Script" id=4]
+[ext_resource path="res://assets/PressStart2P-vaV7.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://assets/ping_pong_8bit_plop.ogg" type="AudioStream" id=6]
+[ext_resource path="res://assets/VCR_OSD_MONO_1.001.ttf" type="DynamicFontData" id=7]
+[ext_resource path="res://assets/start.png" type="Texture" id=8]
+[ext_resource path="res://assets/quit.png" type="Texture" id=9]
+[ext_resource path="res://assets/separator.png" type="Texture" id=10]
+[ext_resource path="res://assets/Circle.png" type="Texture" id=11]
+[ext_resource path="res://assets/levelselect.png" type="Texture" id=12]
+[ext_resource path="res://assets/emptybtn.png" type="Texture" id=13]
+[ext_resource path="res://Credits/Credits.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Help/Help.tscn" type="PackedScene" id=15]
+
+[sub_resource type="DynamicFont" id=1]
+size = 40
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 40
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 50
+outline_color = Color( 1, 0.901961, 0.615686, 1 )
+font_data = ExtResource( 5 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 654.074, 10 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 51.8298, 354.511 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 40
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=7]
+size = 40
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=10]
+size = 60
+font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=11]
+size = 30
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=12]
+size = 40
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=13]
+size = 26
+font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=14]
+size = 40
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=15]
+size = 24
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=16]
+size = 21
+font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=17]
+size = 33
+font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=18]
+size = 30
+font_data = ExtResource( 5 )
+
+[node name="Level" type="Node"]
+script = ExtResource( 4 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.145098, 0.168627, 0.286275, 1 )
+
+[node name="Seperator" type="Sprite" parent="."]
+position = Vector2( -1279.21, -513.3 )
+scale = Vector2( 3.00034, 1.8225 )
+texture = ExtResource( 10 )
+offset = Vector2( 640, 480 )
+
+[node name="Circle" type="Sprite" parent="."]
+position = Vector2( 639, 360 )
+texture = ExtResource( 11 )
+
+[node name="PlayerScore" type="Label" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -200.0
+custom_colors/font_color = Color( 1, 0.901961, 0.615686, 1 )
+custom_fonts/font = SubResource( 1 )
+text = "Test"
+align = 1
+
+[node name="OpponentScore" type="Label" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 200.0
+custom_colors/font_color = Color( 1, 0.901961, 0.615686, 1 )
+custom_fonts/font = SubResource( 2 )
+text = "Test"
+align = 1
+
+[node name="CountdownLabel" type="Label" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -379.0
+margin_bottom = -5.0
+custom_colors/font_color = Color( 1, 0.901961, 0.615686, 1 )
+custom_fonts/font = SubResource( 3 )
+text = "3
+"
+align = 1
+valign = 1
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 50, 360 )
+
+[node name="WallTop" type="StaticBody2D" parent="."]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallTop"]
+position = Vector2( 642.756, -10 )
+shape = SubResource( 4 )
+
+[node name="WallBottom" type="StaticBody2D" parent="."]
+position = Vector2( 0, 740 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallBottom"]
+position = Vector2( 642.756, -10 )
+shape = SubResource( 4 )
+
+[node name="Opponent" parent="." instance=ExtResource( 2 )]
+position = Vector2( 1230, 360 )
+
+[node name="Ball" parent="." instance=ExtResource( 3 )]
+position = Vector2( 640, 360 )
+
+[node name="Left" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Left"]
+position = Vector2( -53.9391, 358.682 )
+shape = SubResource( 5 )
+
+[node name="Right" type="Area2D" parent="."]
+position = Vector2( 1388.32, 0 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Right"]
+position = Vector2( -53.9391, 358.682 )
+shape = SubResource( 5 )
+
+[node name="CountdownTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="ScoreSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+
+[node name="StartButton" type="Button" parent="."]
+margin_left = 510.0
+margin_top = 215.0
+margin_right = 777.0
+margin_bottom = 307.0
+custom_fonts/font = SubResource( 6 )
+icon = ExtResource( 8 )
+flat = true
+
+[node name="OptionButton" type="OptionButton" parent="."]
+margin_left = 772.0
+margin_top = 382.0
+margin_right = 935.0
+margin_bottom = 429.0
+custom_fonts/font = SubResource( 7 )
+expand_icon = true
+
+[node name="GameTitle" type="Label" parent="."]
+margin_left = 436.0
+margin_top = 60.0
+margin_right = 856.0
+margin_bottom = 127.0
+custom_colors/font_color = Color( 1, 0.901961, 0.615686, 1 )
+custom_fonts/font = SubResource( 10 )
+text = "Pong 2D"
+
+[node name="AuthorTitle" type="Label" parent="."]
+margin_left = 457.0
+margin_top = 140.0
+margin_right = 817.0
+margin_bottom = 167.0
+custom_colors/font_color = Color( 1, 0.901961, 0.615686, 1 )
+custom_fonts/font = SubResource( 11 )
+text = "by BUP InfoTech Club"
+
+[node name="ExitButton" type="Button" parent="."]
+margin_left = 515.0
+margin_top = 505.0
+margin_right = 777.0
+margin_bottom = 589.0
+custom_fonts/font = SubResource( 12 )
+icon = ExtResource( 9 )
+flat = true
+
+[node name="DifficultyLabel" type="Sprite" parent="."]
+position = Vector2( 642, 407 )
+texture = ExtResource( 12 )
+
+[node name="Credits" parent="." instance=ExtResource( 14 )]
+visible = false
+position = Vector2( 297, 171 )
+
+[node name="Help" parent="." instance=ExtResource( 15 )]
+visible = false
+
+[node name="CreditsButton" type="Button" parent="."]
+margin_left = 517.0
+margin_top = 623.0
+margin_right = 779.0
+margin_bottom = 679.0
+icon = ExtResource( 13 )
+flat = true
+clip_text = true
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Label" type="Label" parent="CreditsButton"]
+margin_left = 43.0
+margin_top = 15.0
+margin_right = 267.0
+margin_bottom = 67.0
+custom_colors/font_color = Color( 0.309804, 1, 0.992157, 1 )
+custom_fonts/font = SubResource( 13 )
+text = "Credits"
+
+[node name="GoBackButton" type="Button" parent="."]
+margin_left = 976.0
+margin_top = 616.0
+margin_right = 1242.0
+margin_bottom = 691.0
+icon = ExtResource( 13 )
+flat = true
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="GoBackLabel" type="Label" parent="GoBackButton"]
+margin_left = 51.0
+margin_top = 16.0
+margin_right = 212.0
+margin_bottom = 52.0
+custom_colors/font_color = Color( 0.309804, 1, 0.992157, 1 )
+custom_fonts/font = SubResource( 14 )
+text = "Go Back"
+
+[node name="GameModeBtn" type="OptionButton" parent="."]
+margin_left = 771.0
+margin_top = 315.0
+margin_right = 999.0
+margin_bottom = 358.0
+custom_fonts/font = SubResource( 15 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="GameModeBtn"]
+position = Vector2( -132, 19 )
+texture = ExtResource( 13 )
+
+[node name="GameModeLabel" type="Label" parent="GameModeBtn"]
+margin_left = -225.0
+margin_top = 10.0
+margin_right = -36.0
+margin_bottom = 44.0
+custom_colors/font_color = Color( 0.309804, 1, 0.992157, 1 )
+custom_fonts/font = SubResource( 16 )
+text = "Game Mode"
+
+[node name="PlayerWinMsg" type="Label" parent="."]
+margin_left = 92.0
+margin_top = 64.0
+margin_right = 319.0
+margin_bottom = 169.0
+custom_colors/font_color = Color( 1, 0.901961, 0.615686, 1 )
+custom_fonts/font = SubResource( 17 )
+text = "Player
+Orange
+Wins! "
+align = 1
+
+[node name="OpponentWinMsg" type="Label" parent="."]
+margin_left = 1032.0
+margin_top = 58.0
+margin_right = 1253.0
+margin_bottom = 182.0
+custom_colors/font_color = Color( 1, 0.901961, 0.615686, 1 )
+custom_fonts/font = SubResource( 17 )
+text = "Player
+Blue
+Wins! "
+
+[node name="HelpButton" type="Button" parent="."]
+margin_left = 512.0
+margin_top = 451.0
+margin_right = 774.0
+margin_bottom = 507.0
+icon = ExtResource( 13 )
+flat = true
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Label" type="Label" parent="HelpButton"]
+margin_left = 73.0
+margin_top = 12.0
+margin_right = 193.0
+margin_bottom = 42.0
+custom_colors/font_color = Color( 0.309804, 1, 0.992157, 1 )
+custom_fonts/font = SubResource( 18 )
+text = "Help"
+__meta__ = {
+"_edit_group_": true
+}
+
+[connection signal="body_entered" from="Left" to="." method="_on_Left_body_entered"]
+[connection signal="body_entered" from="Right" to="." method="_on_Right_body_entered"]
+[connection signal="timeout" from="CountdownTimer" to="." method="_on_CountdownTimer_timeout"]
+[connection signal="pressed" from="StartButton" to="." method="start_game"]
+[connection signal="item_selected" from="OptionButton" to="." method="_on_OptionButton_item_selected"]
+[connection signal="pressed" from="ExitButton" to="." method="_on_ExitButton_pressed"]
+[connection signal="pressed" from="CreditsButton" to="." method="_on_CreditsButton_pressed"]
+[connection signal="pressed" from="GoBackButton" to="." method="_on_GoBackButton_pressed"]
+[connection signal="item_selected" from="GameModeBtn" to="." method="_on_GameModeBtn_item_selected"]
+[connection signal="pressed" from="HelpButton" to="." method="_on_HelpButton_pressed"]
