@@ -179,6 +179,8 @@ func _on_CreditsButton_pressed():
 	hide_ui()
 	$GoBackButton.visible = true
 	$Credits.visible = true
+	$PlayerWinMsg.hide()
+	$OpponentWinMsg.hide()
 
 
 func _on_GoBackButton_pressed():
@@ -207,3 +209,5 @@ func _on_HelpButton_pressed():
 	hide_ui()
 	$GoBackButton.visible = true
 	$Help.visible = true
+	$PlayerWinMsg.hide()
+	$OpponentWinMsg.hide()
