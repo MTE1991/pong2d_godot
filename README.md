@@ -13,7 +13,7 @@ A simple 2D Pong game made with [Godot Engine](https://godotengine.org/). This p
 
 ## 🛠️ Built With
 
-- **Godot Engine** 3.x or 4.x (check the version you used)
+- **Godot Engine** 3.x or 4.x
 - **GDScript** for game logic
 
 ## 🚀 Getting Started
